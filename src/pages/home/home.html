@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+     G00387947
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="openSettingsPage()">
+        <ion-icon ios="ios-settings" md="md-settings"></ion-icon>
+      </button>
+    </ion-buttons> 
+
+  </ion-navbar>
+</ion-header>
+ 
+<ion-content padding>
+   <div [hidden]="initialMessageHidden">
+    <h3>{{initialMessage}}</h3>
+  </div>
+
+  <!-- Country News and Weather Display on the homepage -->
+<!-- Country/city from API: https://restcountries.com/v3.1/all-->
+
+
+<h1>News and weather for: {{newCity}} {{name}} {{common}}</h1>
+  <ion-item *ngFor="let city of cities">
+   <ion-img scr="https://flagcdn.com/w320/per.png"></ion-img>          
+  </ion-item>
+
+    <br>
+
+      <hr>
+      <br>
+       <!-- Temp /units(user choice). The weather des and icon(ie clouds/rain
+        wind from direaction. All taken from https://api.weatherbit.io) the location
+        of this output from cities "lan" + "lon" -->
+   <ion-list> 
+      <h5>Temperature:
+        {{ temp }} {{ Unit }}</h5>
+      <p *ngFor="let weather of weather"></p>
+      <br>
+      <h5>Weather: </h5>
+      <h3> {{ description }}  {{ icon }}   </h3> 
+      <p *ngFor="let weather of weather"></p>
+  <ion-img src="https://api.weatherbit.io"></ion-img>
+    
+      <br>  
+      <br>
+      <h5>Wind From: </h5>
+      <br>
+      <p> {{ wind_cdir_full }} </p>
+  </ion-list>
+      <br>
+  
+        <button ion-button [disabled]="newsDisabled" (click)="getNews()">News</button>
+          <!-- set in home ts   -->
+      <ion-item [hidden]="newsButton"></ion-item>
+      <span *ngIf="newsHidden">
+
+
+         <!--  The News of the country with title and description -->
+    
+          <h1>News from {{ country }} </h1>
+    <ion-item *ngFor="let news of news">
+          <img src="{{ urlToImage }}" >
+          <br>
+            <a href="{{ url }}" class="underline">{{ title }}</a>
+              <p>{{ description }}</p>
+
+
+      
+    </ion-item>
+  </span>
+</ion-content>
